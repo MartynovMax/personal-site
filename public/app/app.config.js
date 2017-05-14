@@ -3,9 +3,13 @@
 
   angular.module('App').config(config);
 
-  config.$inject = ['$httpProvider', '$translateProvider', 'defaultLanguage'];
-  function config($httpProvider, $translateProvider, defaultLanguage) {
+  config.$inject = ['$httpProvider', '$translateProvider', 'defaultLanguage', 'AnalyticsProvider', 'CREDENTIALS'];
+  function config($httpProvider, $translateProvider, defaultLanguage, AnalyticsProvider, CREDENTIALS) {
     // firebase.initializeApp(FirebaseDetails);
+
+    AnalyticsProvider.setAccount(CREDENTIALS.GOOGLE_ANALYTICS_ID);
+    AnalyticsProvider.trackPages(true);
+    AnalyticsProvider.setPageEvent('$stateChangeSuccess');
 
     $translateProvider
       .useStaticFilesLoader({

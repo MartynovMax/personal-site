@@ -34,6 +34,7 @@
     templateUrl: 'app/pages/home/home.html',
     controller: 'HomeCtrl',
     controllerAs: 'ctrl',
+    pageTrack: '/home'
   };
   /*
    * End State Controllers

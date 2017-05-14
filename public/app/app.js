@@ -4,13 +4,14 @@
   angular.module('App', [
     'ui.router',
     'pascalprecht.translate',
+    'angular-google-analytics',
   ]);
 
 
   angular.module('App').run(run);
 
-  run.$inject = ['$rootScope', 'defaultLanguage', '$translate', '$localStorage'];
-  function run($rootScope, defaultLanguage, $translate, $localStorage) {
+  run.$inject = ['$rootScope', 'defaultLanguage', '$translate', '$localStorage', 'Analytics'];
+  function run($rootScope, defaultLanguage, $translate, $localStorage, Analytics) {
     $rootScope.currentLang = '';
 
     $rootScope.init    = init;

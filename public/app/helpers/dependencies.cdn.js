@@ -25,3 +25,12 @@ try {
     unescape('<script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js" type="text/javascript"></script>')
   );
 }
+
+
+try {
+  angular.module('angular-google-analytics');  
+} catch (e) {
+  document.write(
+    unescape('<script src="lib/angular-google-analytics/dist/angular-google-analytics.min.js" type="text/javascript"></script>')
+  );
+}

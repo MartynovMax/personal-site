@@ -30,22 +30,20 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="app/pages/home/home.css">
     <!-- endinject -->
-
-
-    <!-- <script src="lib/angular-translate/angular-translate.min.js"></script> -->
-    <!-- <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script> -->
   </head>
 
   <body class="container">
     <div class="wrap row">
       <div class="header row">
         <div class="locale-buttons">
-          <a ng-click="setLang('en-us')" 
+          <a ng-click="setLang('en-us')"
+             ga-track-event="['language.btn', 'en-us']" 
              ng-class="{'active': currentLang === 'en-us'}">
             en
           </a>
           <div class="vr">&nbsp;</div>
           <a ng-click="setLang('ru-ru')"
+             ga-track-event="['language.btn', 'ru-ru']"
              ng-class="{'active': currentLang === 'ru-ru'}">
             ru
           </a>
@@ -72,17 +70,28 @@
     </div>
 
 
-
+    <!-- CDN DEPENDENCIES -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.15.1/angular-translate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-loader-static-files/2.15.1/angular-translate-loader-static-files.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-analytics/1.1.9/angular-google-analytics.min.js"></script>
+    <!-- END CDN DEPENDENCIES -->
+
+
+    <!-- LOCAL DEPENDENCIES -->
+    <!-- <script src="lib/angular/angular.min.js"></script> -->
+    <!-- <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script> -->
+    <!-- <script src="lib/angular-translate/angular-translate.min.js"></script> -->
+    <!-- <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script> -->
+    <!-- <script src="lib/angular-google-analytics/dist/angular-google-analytics.min.js"></script> -->
+    <!-- END LOCAL DEPENDENCIES -->
 
 
     <!-- dependencies-js:js -->
     <!-- endinject -->
 
-    <!-- app:js -->1
+    <!-- app:js -->
     <script src="app/helpers/utils.js"></script>
     <script src="app/helpers/dependencies.cdn.js"></script>
     <script src="app/app.js"></script>
