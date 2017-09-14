@@ -11,7 +11,7 @@
   font-family: 'Arimo', sans-serif;
   text-indent: 1.2rem;
   font-size: 1.4rem;
-  line-height: 2rem;
+  line-height: 2.2rem;
   margin-bottom: 2rem;
 }
 
@@ -25,6 +25,13 @@
   display: inline-block;
   padding: 0 1rem; 
   margin: 0;
+}
+
+.home ul.social-links li a.social-link-upwork {
+}
+.home ul.social-links li a.social-link-github {
+}
+.home ul.social-links li a.social-link-email {
 }
 
 .home ul.social-links li a img {

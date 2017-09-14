@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" ng-app="App">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
 
     <base href="/">
 
-    <title>Max Martynov - JS Software Developer</title>
+    <title>Max Martynov - Web Developer</title>
 
     <meta name="title" content="Max Martynov - JS Software Developer">
     <meta name="description" content="Web &amp; Mobile Software Developer (JavaScript / Angular / Ionic / Node)">
@@ -21,7 +21,7 @@
     <link rel="shortcut icon" href="http://mmaxs.com/assets/img/favicon.png" type="image/png">
     <link href="https://fonts.googleapis.com/css?family=Arimo|Open+Sans" rel="stylesheet">
 
-    <!-- dependencies-css:css -->
+    <!-- dependencies:css -->
     <link rel="stylesheet" href="vendor/normalize/normalize.css">
     <link rel="stylesheet" href="vendor/Skeleton/css/skeleton.css">
     <!-- endinject -->
@@ -29,6 +29,10 @@
     <!-- styles:css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="app/pages/home/home.css">
+    <!-- endinject -->
+
+    <!-- bundle:css -->
+    <link rel="stylesheet" href="dist/bundle.min.css">
     <!-- endinject -->
   </head>
 
@@ -39,13 +43,13 @@
           <a ng-click="setLang('en-us')"
              ga-track-event="['language.btn', 'en-us']" 
              ng-class="{'active': currentLang === 'en-us'}">
-            en
+            EN
           </a>
           <div class="vr">&nbsp;</div>
           <a ng-click="setLang('ru-ru')"
              ga-track-event="['language.btn', 'ru-ru']"
              ng-class="{'active': currentLang === 'ru-ru'}">
-            ru
+            RU
           </a>
         </div>
 
@@ -87,8 +91,12 @@
     <!-- <script src="lib/angular-google-analytics/dist/angular-google-analytics.min.js"></script> -->
     <!-- END LOCAL DEPENDENCIES -->
 
+    <!-- bundle:js -->
+    <script src="dist/bundle.min.js"></script>
+    <!-- endinject -->
 
-    <!-- dependencies-js:js -->
+
+    <!-- dependencies:js -->
     <!-- endinject -->
 
     <!-- app:js -->

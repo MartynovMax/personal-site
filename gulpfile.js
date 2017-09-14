@@ -41,6 +41,8 @@ var PATHS = {
   BUILD: 'public/dist'  
 };
 
+var FILE_NAME_BUILD_JS  = 'bundle.min.js';
+var FILE_NAME_BUILD_CSS = 'bundle.min.css';
 
 
 var DEFAULT_TASKS = ['inject', 'watch'];
@@ -56,6 +58,7 @@ gulp.task('reload_app', task_reload_app);
 gulp.task('reload_css', task_reload_css);
 gulp.task('reload_js', task_reload_js);
 gulp.task('inject', task_inject);
+gulp.task('inject_build_files', task_inject_build_files);
 
 
 
@@ -168,14 +171,76 @@ function task_inject() {
 
 
 
+function task_inject_build_files() {
+
+  console.log('task_inject_build_files')
+
+  
+  var target = gulp.src(PATHS.INDEX);
+
+  // app
+  target.pipe(
+    inject(gulp.src(PATHS.APP), {name: 'app', empty: true}))
+    .pipe(gulp.dest(PATHS.DEST)
+  );
+
+  // js components 
+  target.pipe(
+    inject(gulp.src([]), {name: 'components'}))
+    .pipe(gulp.dest(PATHS.DEST)
+  );
+
+  // css components 
+  target.pipe(
+    inject(gulp.src([]), {name: 'styles'}))
+    .pipe(gulp.dest(PATHS.DEST)
+  );
+
+  // js dependencies 
+  target.pipe(
+    inject(gulp.src([]), {name: 'dependencies'}))
+    .pipe(gulp.dest(PATHS.DEST)
+  );
+
+  // css dependencies 
+  target.pipe(
+    inject(gulp.src([]), {name: 'dependencies'}))
+    .pipe(gulp.dest(PATHS.DEST)
+  );
+
+
+  gulp.src(PATHS.INDEX).pipe(
+    inject(
+      gulp.src(PATHS.BUILD + '/' + FILE_NAME_BUILD_JS, {read: false})
+      , {
+        name: 'bundle',
+        addRootSlash: false,
+        ignorePath: 'public',
+      }))
+    .pipe(gulp.dest(PATHS.DEST)
+  );
+
+  gulp.src(PATHS.INDEX).pipe(
+    inject(
+      gulp.src(PATHS.BUILD + '/' + FILE_NAME_BUILD_CSS, {read: false})
+      , {
+        name: 'bundle',
+        addRootSlash: false,
+        ignorePath: 'public',
+      }))
+    .pipe(gulp.dest(PATHS.DEST)
+  );
+};
+
+
+
+
 
 function task_build() {
   var NAME_FILE_APP_JS           = 'app.temp.js';
   var NAME_FILE_APP_CSS          = 'app.temp.css';
   var NAME_FILE_DEPENDENCIES_JS  = 'dependencies.temp.js';
   var NAME_FILE_DEPENDENCIES_CSS = 'dependencies.temp.css';
-  var NAME_FILE_RESULT_JS        = 'bundle.min.js';
-  var NAME_FILE_RESULT_CSS       = 'bundle.min.css';
 
   // JS
   // dependencied
@@ -188,10 +253,10 @@ function task_build() {
     .on('end', function(){
             
       // app
-      gulp.src(PATHS.JS)
+      gulp.src(PATHS.APP.concat(PATHS.JS))
         .pipe(concat(NAME_FILE_APP_JS))
         .pipe(uglify({
-          mangle: false
+          // mangle: false
         }))
         .pipe(gulp.dest(PATHS.BUILD))
         .on('end', function(){
@@ -203,13 +268,14 @@ function task_build() {
           ];
 
           gulp.src(resultFiles)
-            .pipe(concat(NAME_FILE_RESULT_JS))
+            .pipe(concat(FILE_NAME_BUILD_JS))
             .pipe(size({
               title: 'size result JS file'
             }))
             .pipe(gulp.dest(PATHS.BUILD))
             .on('end', function() {
-              // del(resultFiles);
+              del(resultFiles);
+              __end();
             });
         });
     });
@@ -241,18 +307,27 @@ function task_build() {
           ];
 
           gulp.src(resultFiles)
-            .pipe(concat(NAME_FILE_RESULT_CSS))
+            .pipe(concat(FILE_NAME_BUILD_CSS))
             .pipe(size({
               title: 'size result CSS file'
             }))
             .pipe(gulp.dest(PATHS.BUILD))
             .on('end', function() {
               del(resultFiles);
+              __end();
             });
         });
-
     });
 
+
+    var ended_tasks_counter = 0;
+    function __end() {
+      ended_tasks_counter++;
+
+      if (ended_tasks_counter >= 2) {
+        gulp.start('inject_build_files');
+      }
+    }
 }
 
 
